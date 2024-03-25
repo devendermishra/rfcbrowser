@@ -1,0 +1,54 @@
+/* RFC.module.css */
+
+.container {
+    font-family: 'Arial', sans-serif;
+    margin: 2rem;
+    color: #333;
+}
+
+.header {
+    color: #205081; /* A consistent shade of blue for headers */
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content {
+    background-color: #e8f1f8; /* Light blue background for content */
+    padding: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid #d0e2f0; /* A border that fits the blue theme */
+    margin-bottom: 1rem;
+}
+
+.backButton {
+    padding: 0.5rem 1rem;
+    background-color: #205081; /* Darker blue for the button */
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #1b4680; /* A slightly darker blue on hover */
+}
+
+/* You may want to add some responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .container {
+      margin: 1rem;
+    }
+
+    .header {
+      font-size: 1.5rem;
+    }
+
+    .content {
+      padding: 0.5rem;
+    }
+
+    .backButton {
+      padding: 0.3rem 0.6rem;
+    }
+}

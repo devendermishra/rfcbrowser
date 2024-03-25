@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+service/.vscode
+service/rfc-service
+ui/rfc-app/node_modules/
+service/__debug_bin*
+
