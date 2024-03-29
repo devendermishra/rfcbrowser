@@ -10,6 +10,10 @@
     color: #205081; /* A nice shade of blue */
     font-size: 2rem;
     margin-bottom: 1rem;
+    position: relative; /* This will be the anchor point for the absolute positioning of the button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .list {
@@ -80,15 +84,44 @@
     flex: 1; /* Distributes space evenly */
 }
 .cellId {
-    flex-basis: 5%; /* Adjust this percentage as needed */
-    flex-grow: 0;
+    width: 5%;
 }
   
 .cellTitle {
-    flex-basis: 40%; /* Adjust this percentage as needed */
-    flex-grow: 1;
+    width: 40%;
 }
 .cellAuthors {
-    flex-basis: 10%; /* Adjust this percentage as needed */
-    flex-grow: 1;
+    width: 10%
+}
+
+/* Replace .row with tr, and .heading with thead */
+.table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse; /* For border spacing */
+}
+  
+thead {
+    background-color: #c8d1f8; /* Light blue background */
+}
+  
+tr {
+    background-color: #e8f1f8; /* Light blue background for rows */
+}
+  
+.refreshButton {
+    padding: 0.5rem 1rem;
+    background-color: #205081; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute; /* Position it relative to its nearest positioned ancestor */
+    top: 1rem;
+    right: 2rem;
+}
+  
+.refreshButton:hover {
+    background-color: #1b4680; /* Darker blue on hover */
 }

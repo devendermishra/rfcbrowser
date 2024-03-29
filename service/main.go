@@ -35,6 +35,15 @@ func main() {
 		c.JSON(http.StatusOK, rfcs)
 	})
 
+	r.POST("/refresh_rfcs", func(c *gin.Context) {
+		rfcs, err := refreshRFCs(dbPath)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, rfcs)
+	})
+
 	r.GET("/rfc/:rfc_id", func(c *gin.Context) {
 		rfcID := c.Param("rfc_id")
 		content, err := downloadRFC(rfcID)
@@ -106,6 +115,25 @@ type RFC struct {
 	CreatedAt   string `json:"created_at"`
 }
 
+func refreshRFCs(dbPath string) ([]RFC, error) {
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+	_, err = db.Exec("DELETE FROM rfc")
+	if err != nil {
+		return nil, fmt.Errorf("error truncating rfc table: %v", err)
+	}
+
+	err = fetchRFCs(db)
+	if err != nil {
+		return nil, err
+	}
+
+	return getUpdateRFCs(db)
+}
+
 func getAllRFCs(dbPath string) ([]RFC, error) {
 	db, err := sql.Open("sqlite3", dbPath)
 	if err != nil {
@@ -129,6 +157,11 @@ func getAllRFCs(dbPath string) ([]RFC, error) {
 	}
 
 	// Now query all rows
+	// Check for errors after iterating through rows
+	return getUpdateRFCs(db)
+}
+
+func getUpdateRFCs(db *sql.DB) ([]RFC, error) {
 	rows, err := db.Query("SELECT id, title,authors, year, month, obsoleted_by, obsoletes, updates, updated_by, status FROM rfc")
 	if err != nil {
 		return nil, fmt.Errorf("error querying RFCs: %v", err)
@@ -144,7 +177,6 @@ func getAllRFCs(dbPath string) ([]RFC, error) {
 		rfcs = append(rfcs, r)
 	}
 
-	// Check for errors after iterating through rows
 	if err = rows.Err(); err != nil {
 		return nil, fmt.Errorf("error iterating through RFC rows: %v", err)
 	}
