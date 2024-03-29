@@ -1,0 +1,94 @@
+/* RFCList.module.css */
+
+.container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 2rem;
+}
+
+.header {
+    color: #205081; /* A nice shade of blue */
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.listItem {
+    background-color: #e8f1f8; /* Light blue background */
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s ease;
+}
+
+.listItem:hover {
+    background-color: #d0e2f0; /* Slightly darker on hover */
+}
+
+.link {
+    text-decoration: none;
+    color: #205081; /* Matching the header color */
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.searchBox {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box; /* Makes sure the padding doesn't affect the width */
+    border: 2px solid #205081; /* Border color to match the blue theme */
+    border-radius: 0.3rem;
+    outline: none; /* Removes the default focus outline */
+    transition: all 0.3s ease;
+}
+
+.searchBox:focus {
+    border-color: #1b4680; /* Darker blue when the input is focused */
+    box-shadow: 0 0 8px rgba(33, 80, 129, 0.2); /* A subtle shadow for depth */
+}
+
+.table {
+    width: 100%;
+    text-align: left;
+}
+
+.row {
+    display: flex;
+    background-color: #e8f1f8; /* Light blue background */
+    padding: 0.5rem;
+    border-bottom: 1px solid #d0e2f0; /* Border to separate rows */
+}
+.heading {
+    display: flex;
+    background-color: #c8d1f8; /* Light blue background */
+    padding: 0.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #d0e2f0; /* Border to separate rows */
+}
+
+.cell {
+    padding: 0.5rem;
+    flex: 1; /* Distributes space evenly */
+}
+.cellId {
+    flex-basis: 5%; /* Adjust this percentage as needed */
+    flex-grow: 0;
+}
+  
+.cellTitle {
+    flex-basis: 40%; /* Adjust this percentage as needed */
+    flex-grow: 1;
+}
+.cellAuthors {
+    flex-basis: 10%; /* Adjust this percentage as needed */
+    flex-grow: 1;
+}
