@@ -23,6 +23,20 @@ const RFC: React.FC = () => {
     const createMarkup = (htmlContent: string) => {
         return { __html: DOMPurify.sanitize(htmlContent) };
     };
+    const handleDownload = () => {
+      fetch(`http://127.0.0.1:8080/download/rfc/${id}`, { method: 'POST' })
+        .then(response => {
+          if (response.ok) {
+            console.log('RFC downloaded successfully');
+            // Refresh the page to reflect any changes
+            window.location.reload();
+            // Optional: Update state or UI to reflect the download status
+          } else {
+            console.error('Failed to download RFC');
+          }
+        })
+        .catch(error => console.error('Error downloading RFC:', error));
+    };
 
     return (
       <div className={styles.container}>
@@ -30,6 +44,9 @@ const RFC: React.FC = () => {
           Back
         </button>
         <h1 className={styles.header}>{rfc?.id}</h1>
+        <button onClick={handleDownload} className={styles.downloadButton}>
+          Download
+        </button>
         <div
         className={styles.content}
         dangerouslySetInnerHTML={createMarkup(rfc?.content || '')}></div>

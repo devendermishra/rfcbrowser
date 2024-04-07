@@ -52,3 +52,25 @@
       padding: 0.3rem 0.6rem;
     }
 }
+
+/* Add or update these styles in RFC.module.css */
+.downloadButton {
+  padding: 0.5rem 1rem;
+  background-color: #205081; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Position the button as needed, for example, to the right of the header */
+}
+
+.downloadButton:hover {
+  background-color: #1b4680; /* Darker blue on hover */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

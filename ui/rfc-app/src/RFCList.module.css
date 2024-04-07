@@ -125,3 +125,20 @@ tr {
 .refreshButton:hover {
     background-color: #1b4680; /* Darker blue on hover */
 }
+
+.downloadButton {
+    padding: 5px 10px;
+    background-color: #205081; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .downloadButton:hover {
+    background-color: #1b4680; /* Darker blue on hover */
+  }
+
+  .tickMark {
+    color: green; /* Or any color that signifies success/completion */
+  }
