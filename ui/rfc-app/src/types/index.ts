@@ -10,6 +10,7 @@ export interface IRFC {
     updated_by: string;
     updates: string;
     also: string;
+    is_downloaded: boolean;
   }
   
   export interface IRFCDetail {

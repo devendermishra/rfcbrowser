@@ -23,10 +23,7 @@ const RFCList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8080/rfcs')
-      .then((response) => response.json())
-      .then((data: IRFC[]) => setRfcs(data))
-      .catch((error) => console.error('Error fetching RFCs:', error));
+    fetchRFCs();
   }, []);
 
   const refreshRFCs = () => {
@@ -35,6 +32,27 @@ const RFCList: React.FC = () => {
       .then((data: IRFC[]) => setRfcs(data))
       .catch((error) => console.error('Error fetching RFCs:', error));
   };
+
+  const fetchRFCs = () => {
+    fetch('http://127.0.0.1:8080/rfcs')
+        .then((response) => response.json())
+        .then((data: IRFC[]) => setRfcs(data))
+        .catch((error) => console.error('Error fetching RFCs:', error));
+}
+
+const handleDownload = (rfcId: string) => {
+    // Call the API to download the RFC
+    fetch(`http://127.0.0.1:8080/download/rfc/${rfcId}`, { method: 'POST' })
+      .then(response => {
+        if (response.ok) {
+          // Assuming the RFC list needs to be refreshed to update the is_downloaded status
+          fetchRFCs();
+        } else {
+          console.error('Failed to download RFC');
+        }
+      })
+      .catch(error => console.error('Error downloading RFC:', error));
+};
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -71,6 +89,7 @@ const RFCList: React.FC = () => {
             <th className={styles.cell}>Updated by</th>
             <th className={styles.cell}>Updates</th>
             <th className={styles.cell}>See Also</th>
+            <th className={styles.cell}>Is Downloaded?</th>
           </tr>
         </thead>
         <tbody>
@@ -99,6 +118,13 @@ const RFCList: React.FC = () => {
               </td>
               <td className={styles.cell}>
                 {renderRFCLinks(rfc.also, '/rfc/')}
+              </td>
+              <td>
+              {rfc.is_downloaded ? (
+                  <span>&#10004;</span> // This is a tick mark
+                ) : (
+                  <button onClick={() => handleDownload(rfc.id)}>Download</button>
+                )}
               </td>
             </tr>
           ))}
